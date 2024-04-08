@@ -1,3 +1,17 @@
-<header class="time-tracker-header">
+<header class="time-tracker-header" *transloco="let t">
+
+  <section class="search-box">
+    
+    <span class="p-input-icon-left">
+      <i class="pi pi-search"></i>
+      <input
+        type="text"
+        pInputText
+        [placeholder]="t('common.search')"
+        [(ngModel)]="search"
+        (ngModelChange)="onChangeSearch($event)" />
+    </span>
+
+  </section>
 
 </header>

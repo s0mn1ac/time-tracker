@@ -1,6 +1,9 @@
 {
   "title": "Time Tracker",
+  "common": {
+    "search": "Buscar"
+  },
   "home": {
-    "title": "Home"
+    "title": "Inicio"
   }
 }

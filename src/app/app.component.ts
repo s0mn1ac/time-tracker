@@ -1,10 +1,10 @@
 /* Angular */
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 /* Components */
 import { HeaderComponent } from './shared/components/header/header.component';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +18,6 @@ import { CommonModule } from '@angular/common';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-
 
   private _isContentScrolled: boolean = false;
 
