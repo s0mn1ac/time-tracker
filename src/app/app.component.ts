@@ -22,7 +22,7 @@ export class AppComponent {
 
   private _isContentScrolled: boolean = false;
 
-  /* --------- Getters & Setters ------------------------------------------------------------------------------------------------------------------------------- */
+  /* --------- Getters & Setters -------------------------------------------------------------------------------------------------------- */
 
   get isContentScrolled(): boolean {
     return this._isContentScrolled;
@@ -33,11 +33,11 @@ export class AppComponent {
   }
 
 
-  /* --------- Other public methods ------------------------------------------------------------------------------------------------------- */
+  /* --------- Other public methods ----------------------------------------------------------------------------------------------------- */
 
-  public onScroll(scrollEvent: any): void {
+  public onScroll(scrollEvent: Event): void {
     
-    if (!scrollEvent || !scrollEvent.target) {
+    if (!scrollEvent || !(scrollEvent.target instanceof HTMLElement)) {
       return;
     }
 
