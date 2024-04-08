@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+/* Custom */
+@import "styles/variables";
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+  scroll-behavior: smooth;
+
+  body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background: var(--tt-background-color-high);
+    overflow: hidden;
+
+    --tt-background-color-low: var(--tt-background-color-low-light);
+    --tt-background-color-medium: var(--tt-background-color-medium-light);
+    --tt-background-color-high: var(--tt-background-color-high-light);
+
+    &.dark {
+      --tt-background-color-low: var(--tt-background-color-low-dark);
+      --tt-background-color-medium: var(--tt-background-color-medium-dark);
+      --tt-background-color-high: var(--tt-background-color-high-dark);
+    }
+  }
+}

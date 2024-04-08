@@ -1,0 +1,22 @@
+.time-tracker-app-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__header {
+    z-index: 1;
+    transition: box-shadow 0.2s ease;
+
+    &--scrolled {
+      box-shadow: var(--tt-shadow-md);
+    }
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
