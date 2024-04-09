@@ -2,7 +2,7 @@ export interface TaskInterface {
   id: string;
   title: string;
   subtitle: string;
-  created: Date;
-  completed: Date | null;
+  created: string;
+  completed: string;
   subTasks: TaskInterface[]
 }

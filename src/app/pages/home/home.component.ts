@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 /* RxJs */
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 
 /* Transloco */
 import { TranslocoModule,  } from "@jsverse/transloco";
@@ -52,6 +52,7 @@ export class HomeComponent {
       .subscribe((tasks: TaskInterface[]) => {
         this.pendingTasks = orderBy(tasks.filter((task: TaskInterface) => !task.completed), 'created', 'desc');
         this.completedTasks = orderBy(tasks.filter((task: TaskInterface) => task.completed), 'completed', 'desc');
+        console.log(this.completedTasks)
       })
   }
 
