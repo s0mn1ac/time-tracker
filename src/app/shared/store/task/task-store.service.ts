@@ -60,7 +60,13 @@ export class TaskStoreService {
   }
 
   public completeTask(id: string): void {
-    const tasks: TaskInterface[] = this.tasks.map((task: TaskInterface) => task.id === id ? { ...task, completed: true } : task);
+    const tasks: TaskInterface[] = this.tasks.map((task: TaskInterface) => task.id === id ? { ...task, completed: new Date() } : task);
+    this._tasks.next(tasks);
+    this.localStorageService.set(TasksKey, tasks);
+  }
+
+  public reOpenTask(id: string): void {
+    const tasks: TaskInterface[] = this.tasks.map((task: TaskInterface) => task.id === id ? { ...task, completed: null } : task);
     this._tasks.next(tasks);
     this.localStorageService.set(TasksKey, tasks);
   }

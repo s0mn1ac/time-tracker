@@ -32,6 +32,10 @@ export class TaskComponent {
     this.taskStoreService.completeTask(id);
   }
 
+  public onClickReOpenTask(id: string): void {
+    this.taskStoreService.reOpenTask(id);
+  }
+
   public onClickDeleteTask(id: string): void {
     this.taskStoreService.deleteTask(id);
   }

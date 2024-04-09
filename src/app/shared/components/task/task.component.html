@@ -6,8 +6,8 @@
       <span>{{ task.title }}</span>
     </div>
 
-    @if (!task.completed) {
-      <div class="actions-container">
+    <div class="actions-container">
+      @if (!task.completed) {
         <p-button
           icon="pi pi-check"
           [rounded]="true"
@@ -22,8 +22,16 @@
           severity="danger"
           (click)="onClickDeleteTask(task.id)">
         </p-button>
-      </div>
-    }
+      } @else {
+        <p-button
+          icon="pi pi-undo"
+          [rounded]="true"
+          [text]="true"
+          severity="primary"
+          (click)="onClickReOpenTask(task.id)">
+        </p-button>
+      }
+    </div>
 
   </section>
 

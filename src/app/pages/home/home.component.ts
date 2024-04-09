@@ -19,6 +19,7 @@ import { TaskComponent } from '../../shared/components/task/task.component';
 
 /* Interfaces */
 import { TaskInterface } from '../../shared/interfaces/task.interface';
+import { orderBy } from 'lodash';
 
 @Component({
   selector: 'app-home',
@@ -49,8 +50,8 @@ export class HomeComponent {
     
     this.tasks$
       .subscribe((tasks: TaskInterface[]) => {
-        this.pendingTasks = tasks.filter((task: TaskInterface) => !task.completed);
-        this.completedTasks = tasks.filter((task: TaskInterface) => task.completed);
+        this.pendingTasks = orderBy(tasks.filter((task: TaskInterface) => !task.completed), 'created', 'desc');
+        this.completedTasks = orderBy(tasks.filter((task: TaskInterface) => task.completed), 'completed', 'desc');
       })
   }
 

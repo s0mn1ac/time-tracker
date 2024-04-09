@@ -47,7 +47,8 @@ export class HeaderComponent {
       id: uuidv4(),
       title: taskTitle,
       subtitle: '',
-      completed: false,
+      created: new Date(),
+      completed: null,
       subTasks: []
     }
 
