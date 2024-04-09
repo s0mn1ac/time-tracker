@@ -1,0 +1,36 @@
+<div class="task-layout">
+
+  <section class="task-layout__main-task-section">
+
+    <div class="title-container">
+      <span>{{ task.title }}</span>
+    </div>
+
+    @if (!task.completed) {
+      <div class="actions-container">
+        <p-button
+          icon="pi pi-check"
+          [rounded]="true"
+          [text]="true"
+          severity="success"
+          (click)="onClickCompleteTask(task.id)">
+        </p-button>
+        <p-button
+          icon="pi pi-times"
+          [rounded]="true"
+          [text]="true"
+          severity="danger"
+          (click)="onClickDeleteTask(task.id)">
+        </p-button>
+      </div>
+    }
+
+  </section>
+
+  @if (task.subTasks.length > 0) {
+    <section class="task-layout__sub-tasks-section">
+
+    </section>
+  }
+
+</div>

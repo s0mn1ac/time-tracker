@@ -1,0 +1,15 @@
+.home-page-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem;
+}
+
+h2 {
+  text-align: center;
+}

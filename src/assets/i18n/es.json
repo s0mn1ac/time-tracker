@@ -5,6 +5,8 @@
     "addAnotherTask": "Añadir otra tarea..."
   },
   "home": {
-    "title": "Inicio"
+    "title": "Inicio",
+    "pendingTasks": "Tareas pendientes",
+    "completedTasks": "Tareas completadas"
   }
 }

@@ -5,6 +5,8 @@
     "addAnotherTask": "Add another task..."
   },
   "home": {
-    "title": "Home"
+    "title": "Home",
+    "pendingTasks": "Pending tasks",
+    "completedTasks": "Completed tasks"
   }
 }

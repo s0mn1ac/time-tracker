@@ -53,4 +53,16 @@ export class TaskStoreService {
     this.localStorageService.set(TasksKey, tasks);
   }
 
+  public deleteTask(id: string): void {
+    const tasks: TaskInterface[] = this.tasks.filter((task: TaskInterface) => task.id !== id);
+    this._tasks.next(tasks);
+    this.localStorageService.set(TasksKey, tasks);
+  }
+
+  public completeTask(id: string): void {
+    const tasks: TaskInterface[] = this.tasks.map((task: TaskInterface) => task.id === id ? { ...task, completed: true } : task);
+    this._tasks.next(tasks);
+    this.localStorageService.set(TasksKey, tasks);
+  }
+
 }
