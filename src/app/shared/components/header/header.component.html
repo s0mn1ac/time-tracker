@@ -1,17 +1,23 @@
-<header class="time-tracker-header" *transloco="let t">
+<header class="time-tracker-header" *transloco="let t; prefix: 'common'">
 
-  <section class="search-box">
+  <section class="add-task-section">
     
     <span class="p-input-icon-left">
-      <i class="pi pi-search"></i>
+      <i class="pi pi-plus"></i>
       <input
         type="text"
         pInputText
-        [placeholder]="t('common.search')"
-        [(ngModel)]="search"
-        (ngModelChange)="onChangeSearch($event)" />
+        [placeholder]="t(inputPlaceholder)"
+        [(ngModel)]="taskTitle"
+        (keyup.enter)="onClickAddTask(taskTitle)" />
     </span>
 
   </section>
+
+  <!-- <section class="actions-section">
+
+    <p-button icon="pi pi-check" [rounded]="true"></p-button>
+
+  </section> -->
 
 </header>

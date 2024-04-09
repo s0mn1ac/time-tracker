@@ -1,14 +1,19 @@
 /* Angular */
-import { ApplicationConfig, isDevMode } from '@angular/core';
+import { APP_INITIALIZER, ApplicationConfig, isDevMode } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
-
-/* Constants */
-import { routes } from './app.routes';
 
 /* Transloco */
 import { TranslocoHttpLoader } from './transloco-loader';
 import { provideTransloco } from '@jsverse/transloco';
+
+/* PrimeNG */
+import { PrimeNGConfig } from 'primeng/api';
+
+/* Constants */
+import { routes } from './app.routes';
+
+const initializeAppFactory = (primeConfig: PrimeNGConfig) => (): boolean => primeConfig.ripple = true;
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,6 +27,12 @@ export const appConfig: ApplicationConfig = {
         prodMode: !isDevMode(),
       },
       loader: TranslocoHttpLoader
-    })
+    }),
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeAppFactory,
+      deps: [PrimeNGConfig],
+      multi: true
+    }
   ]
 };

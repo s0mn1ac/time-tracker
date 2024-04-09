@@ -1,7 +1,8 @@
 {
   "title": "Time Tracker",
   "common": {
-    "search": "Search"
+    "addATask": "Add a task...",
+    "addAnotherTask": "Add another task..."
   },
   "home": {
     "title": "Home"

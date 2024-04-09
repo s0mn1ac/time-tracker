@@ -1,7 +1,8 @@
 {
   "title": "Time Tracker",
   "common": {
-    "search": "Buscar"
+    "addATask": "Añadir una tarea...",
+    "addAnotherTask": "Añadir otra tarea..."
   },
   "home": {
     "title": "Inicio"
