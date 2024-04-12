@@ -49,7 +49,11 @@ export class HeaderComponent {
       subtitle: '',
       created: new Date().toISOString(),
       completed: '',
-      subTasks: []
+      subTasks: [],
+      elapsed: 0,
+      startDate: '',
+      trackers: [],
+      running: false
     }
 
     this.taskStoreService.addTask(task);

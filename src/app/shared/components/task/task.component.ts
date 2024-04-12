@@ -1,17 +1,23 @@
 /* Angular */
-import { Component, Input } from '@angular/core';
+import { Component, Input, WritableSignal, signal } from '@angular/core';
 
 /* PrimeNG */
 import { PrimeNGModule } from '../../modules/primeng.module';
 
+/* Models */
+import { TaskModel } from '../../models/task.model';
+
 /* Interfaces */
-import { TaskInterface } from '../../interfaces/task.interface';
 import { TaskStoreService } from '../../store/task/task-store.service';
+
+/* Pipes */
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-task',
   standalone: true,
   imports: [
+    DatePipe,
     PrimeNGModule
   ],
   templateUrl: './task.component.html',
@@ -19,14 +25,34 @@ import { TaskStoreService } from '../../store/task/task-store.service';
 })
 export class TaskComponent {
 
-  @Input() public task!: TaskInterface;
+  @Input() public task!: TaskModel;
+
+  private _timer: WritableSignal<number> = signal(0);
 
   constructor(
     private readonly taskStoreService: TaskStoreService
   ) { }
 
+  /* --------- Getters & Setters -------------------------------------------------------------------------------------------------------- */
+
+  get timer(): number {
+    return this._timer();
+  }
+
+  set timer(timer: number) {
+    this._timer.set(timer);
+  }
+
 
   /* --------- On click methods --------------------------------------------------------------------------------------------------------- */
+
+  public onClickStartTimer(): void {
+    this.taskStoreService.startTimer(this.task);
+  }
+
+  public onClickStopTimer(): void {
+    this.taskStoreService.stopTimer(this.task);
+  }
 
   public onClickCompleteTask(id: string): void {
     this.taskStoreService.completeTask(id);

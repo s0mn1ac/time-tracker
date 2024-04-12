@@ -8,6 +8,23 @@
 
     <div class="actions-container">
       @if (!task.completed) {
+        @if (task.running) {
+          <p-button
+            icon="pi pi-stop"
+            [rounded]="true"
+            [text]="true"
+            severity="danger"
+            (click)="onClickStopTimer()">
+          </p-button>
+        } @else {
+          <p-button
+            icon="pi pi-play"
+            [rounded]="true"
+            [text]="true"
+            severity="primary"
+            (click)="onClickStartTimer()">
+          </p-button>
+        }
         <p-button
           icon="pi pi-check"
           [rounded]="true"

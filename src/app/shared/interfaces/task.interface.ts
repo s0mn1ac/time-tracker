@@ -4,5 +4,9 @@ export interface TaskInterface {
   subtitle: string;
   created: string;
   completed: string;
-  subTasks: TaskInterface[]
+  subTasks: TaskInterface[];
+  elapsed: number;
+  startDate: string;
+  trackers: string[][];
+  running: boolean;
 }
