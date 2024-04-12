@@ -8,23 +8,26 @@
 
     <div class="actions-container">
       @if (!task.completed) {
-        @if (task.running) {
-          <p-button
-            icon="pi pi-stop"
-            [rounded]="true"
-            [text]="true"
-            severity="danger"
-            (click)="onClickStopTimer()">
-          </p-button>
-        } @else {
-          <p-button
-            icon="pi pi-play"
-            [rounded]="true"
-            [text]="true"
-            severity="primary"
-            (click)="onClickStartTimer()">
-          </p-button>
-        }
+        <div class="timer-container" [ngClass]="{ 'timer-container--expanded': task.running }">
+          @if (task.running) {
+            <span>{{ task.elapsed | date: 'HH:mm:ss': 'utc' }}</span>
+            <p-button
+              icon="pi pi-stop"
+              [rounded]="true"
+              [text]="true"
+              severity="danger"
+              (click)="onClickStopTimer()">
+            </p-button>
+          } @else {
+            <p-button
+              icon="pi pi-play"
+              [rounded]="true"
+              [text]="true"
+              severity="primary"
+              (click)="onClickStartTimer()">
+            </p-button>
+          }
+        </div>
         <p-button
           icon="pi pi-check"
           [rounded]="true"

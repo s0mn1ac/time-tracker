@@ -1,5 +1,6 @@
 /* Angular */
 import { Component, Input, WritableSignal, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 /* PrimeNG */
 import { PrimeNGModule } from '../../modules/primeng.module';
@@ -17,6 +18,7 @@ import { DatePipe } from '@angular/common';
   selector: 'app-task',
   standalone: true,
   imports: [
+    CommonModule,
     DatePipe,
     PrimeNGModule
   ],
