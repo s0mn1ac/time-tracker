@@ -1,9 +1,9 @@
 <div class="home-page-layout" *transloco="let t; prefix: 'home'">
   
-  @if (pendingTasks.length > 0) {
+  @if (pendingTasks().length > 0) {
     <section class="available-tasks-section">
       <h2>{{ t('pendingTasks') }}</h2>
-      @for (task of pendingTasks; track task.id; let last = $last) {
+      @for (task of pendingTasks(); track task.id; let last = $last) {
         <app-task [task]="task"></app-task>
         @if (!last) {
           <p-divider></p-divider>
@@ -12,10 +12,10 @@
     </section>
   }
 
-  @if (completedTasks.length > 0) {
+  @if (completedTasks().length > 0) {
     <section class="completed-tasks-section">
       <h2>{{ t('completedTasks') }}</h2>
-      @for (task of completedTasks; track task.id; let last = $last) {
+      @for (task of completedTasks(); track task.id; let last = $last) {
         <app-task [task]="task"></app-task>
         @if (!last) {
           <p-divider></p-divider>

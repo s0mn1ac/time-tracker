@@ -1,9 +1,6 @@
 /* Angular */
-import { Component } from '@angular/core';
+import { Component, Signal, WritableSignal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-/* RxJs */
-import { Observable } from 'rxjs';
 
 /* Transloco */
 import { TranslocoModule,  } from "@jsverse/transloco";
@@ -35,25 +32,21 @@ import { orderBy } from 'lodash';
 })
 export class HomeComponent {
 
-  public tasks$: Observable<TaskInterface[]> = this.taskStoreService.tasks$;
+  public tasks: WritableSignal<TaskInterface[]> = this.taskStoreService.tasks;
 
-  public pendingTasks!: TaskInterface[];
-  public completedTasks!: TaskInterface[];
+  public pendingTasks: Signal<TaskInterface[]> = this.buildPendingTasksSignal();
+  public completedTasks: Signal<TaskInterface[]> = this.buildCompletedTasksSignal();
 
   constructor(
     private readonly taskStoreService: TaskStoreService
-  ) {
-    this.initSubscriptions();
+  ) { }
+
+  private buildPendingTasksSignal(): Signal<TaskInterface[]> {
+    return computed(() => orderBy(this.tasks().filter((task: TaskInterface) => !task.completed), 'created', 'desc'));
   }
 
-  private initSubscriptions(): void {
-    
-    this.tasks$
-      .subscribe((tasks: TaskInterface[]) => {
-        this.pendingTasks = orderBy(tasks.filter((task: TaskInterface) => !task.completed), 'created', 'desc');
-        this.completedTasks = orderBy(tasks.filter((task: TaskInterface) => task.completed), 'completed', 'desc');
-        console.log(this.completedTasks)
-      })
+  private buildCompletedTasksSignal(): Signal<TaskInterface[]> {
+    return computed(() => orderBy(this.tasks().filter((task: TaskInterface) => task.completed), 'completed', 'desc'));
   }
 
 }
