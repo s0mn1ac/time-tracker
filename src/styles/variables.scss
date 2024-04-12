@@ -25,10 +25,12 @@
   --tt-shadow-xl: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 
   --tt-background-color-high-light: var(--color-slate-50);
-  --tt-background-color-medium-light: var(--color-slate-50);
-  --tt-background-color-low-light: var(--color-slate-100);
+  --tt-background-color-medium-light: var(--color-slate-100);
+  --tt-background-color-low-light: var(--color-slate-200);
+  --tt-background-color-hover-light: var(--color-slate-300);
 
   --tt-background-color-high-dark: var(--color-slate-900);
   --tt-background-color-medium-dark: var(--color-slate-800);
   --tt-background-color-low-dark: var(--color-slate-700);
+  --tt-background-color-hover-light: var(--color-slate-600);
 }

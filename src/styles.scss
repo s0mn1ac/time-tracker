@@ -1,5 +1,6 @@
 /* Custom */
 @import "styles/divider";
+@import "styles/input";
 @import "styles/variables";
 
 * {
@@ -23,11 +24,13 @@ html {
     --tt-background-color-low: var(--tt-background-color-low-light);
     --tt-background-color-medium: var(--tt-background-color-medium-light);
     --tt-background-color-high: var(--tt-background-color-high-light);
+    --tt-background-color-hover: var(--tt-background-color-hover-light);
 
     &.dark {
       --tt-background-color-low: var(--tt-background-color-low-dark);
       --tt-background-color-medium: var(--tt-background-color-medium-dark);
       --tt-background-color-high: var(--tt-background-color-high-dark);
+      --tt-background-color-hover: var(--tt-background-color-hover-dark);
     }
   }
 }
