@@ -2,6 +2,7 @@
 import { APP_INITIALIZER, ApplicationConfig, importProvidersFrom, isDevMode } from '@angular/core';
 import { provideRouter, withViewTransitions } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
+import { provideFirebaseApp } from '@angular/fire/app';
 
 /* Transloco */
 import { TranslocoHttpLoader } from './transloco-loader';
