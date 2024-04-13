@@ -9,6 +9,7 @@
         pInputText
         [placeholder]="t(inputPlaceholder)"
         [(ngModel)]="taskTitle"
+        (touchend.enter)="onClickAddTask(taskTitle)"
         (keyup.enter)="onClickAddTask(taskTitle)" />
     </span>
 
