@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "time-tracker-angular-app": {
+      "hosting": {
+        "time-tracker": [
+          "time-tracker-angular-app"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "time-tracker-angular-app"
+  }
+}

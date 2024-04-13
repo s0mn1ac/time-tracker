@@ -1,6 +1,6 @@
 /* Angular */
-import { APP_INITIALIZER, ApplicationConfig, isDevMode } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { APP_INITIALIZER, ApplicationConfig, importProvidersFrom, isDevMode } from '@angular/core';
+import { provideRouter, withViewTransitions } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 
 /* Transloco */
@@ -12,13 +12,18 @@ import { PrimeNGConfig } from 'primeng/api';
 
 /* Constants */
 import { routes } from './app.routes';
+import { initializeApp } from 'firebase/app';
+import { environment } from '../environments/environment';
 
 const initializeAppFactory = (primeConfig: PrimeNGConfig) => (): boolean => primeConfig.ripple = true;
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
+    provideRouter(routes, withViewTransitions()),
     provideHttpClient(),
+    importProvidersFrom([
+      provideFirebaseApp(() => initializeApp(environment.firebaseConfig))
+    ]),
     provideTransloco({
       config: { 
         availableLangs: ['en', 'es'],
