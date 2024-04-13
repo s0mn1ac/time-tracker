@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/time-tracker",
+    "public": "dist/time-tracker/browser",
     "ignore": [
       "firebase.json",
       "**/.*",
