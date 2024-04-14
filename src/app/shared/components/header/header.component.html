@@ -7,18 +7,12 @@
       <input
         type="text"
         pInputText
-        [placeholder]="t(inputPlaceholder)"
+        [placeholder]="t(taskInputPlaceholder)"
         [(ngModel)]="taskTitle"
         (touchend.enter)="onClickAddTask(taskTitle)"
         (keyup.enter)="onClickAddTask(taskTitle)" />
     </span>
 
   </section>
-
-  <!-- <section class="actions-section">
-
-    <p-button icon="pi pi-check" [rounded]="true"></p-button>
-
-  </section> -->
 
 </header>

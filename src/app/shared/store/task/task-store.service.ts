@@ -9,6 +9,7 @@ import { TaskModel } from '../../models/task.model';
 
 /* Interfaces */
 import { TaskInterface } from '../../interfaces/task.interface';
+import { SubTaskInterface } from '../../interfaces/sub-task.interface';
 
 /* Constants */
 import { TasksKey } from '../../constants/local-storage.constants';
@@ -49,6 +50,18 @@ export class TaskStoreService {
     this.localStorageService.set(TasksKey, tasks.map((task: TaskModel) => task.getInterface()));
   }
 
+  public modifyTask(modifiedTask: TaskModel): void {
+
+    const tasks: TaskModel[] = this.tasks()
+      .map((task: TaskModel) => task.id === modifiedTask.id
+        ? new TaskModel({ ...modifiedTask.getInterface() })
+        : task
+      );
+
+    this.tasks = tasks;
+    this.localStorageService.set(TasksKey, tasks.map((task: TaskModel) => task.getInterface()));
+  }
+
   public deleteTask(id: string): void {
     const tasks: TaskModel[] = this.tasks().filter((task: TaskModel) => task.id !== id);
     this.tasks = tasks;
@@ -64,26 +77,40 @@ export class TaskStoreService {
     this.localStorageService.set(TasksKey, tasks.map((task: TaskModel) => task.getInterface()));
   }
 
-  public stopTimer(taskToStop: TaskModel): void {
-    taskToStop.stopClock();
-    const tasks: TaskModel[] = this.tasks()
-      .map((task: TaskModel) => task.id === taskToStop.id ? new TaskModel(taskToStop.getInterface()) : task);
-    this.tasks = tasks;
-    this.localStorageService.set(TasksKey, tasks.map((task: TaskModel) => task.getInterface()));
+  public stopTimer(task: TaskModel): void {
+    task.stopClock();
+    this.modifyTask(task);
   }
 
-  public completeTask(id: string): void {
-    const completed: string = new Date().toISOString();
-    const tasks: TaskModel[] = this.tasks().map((task: TaskModel) => task.id === id ? new TaskModel({ ...task, completed }) : task);
-    this.tasks = tasks;
-    this.localStorageService.set(TasksKey, tasks.map((task: TaskModel) => task.getInterface()));
+  public completeTask(task: TaskModel): void {
+    task.completed = new Date().toISOString();
+    this.modifyTask(task);
   }
 
-  public reOpenTask(id: string): void {
-    const completed: string = '';
-    const tasks: TaskModel[] = this.tasks().map((task: TaskModel) => task.id === id ? new TaskModel({ ...task, completed }) : task);
-    this.tasks = tasks;
-    this.localStorageService.set(TasksKey, tasks.map((task: TaskModel) => task.getInterface()));
+  public reOpenTask(task: TaskModel): void {
+    task.completed = '';
+    this.modifyTask(task);
+  }
+
+  public addSubTask(task: TaskModel, subTask: SubTaskInterface): void {
+    task.subTasks.push(subTask);
+    this.modifyTask(task);
+  }
+
+  public completeSubTask(task: TaskModel, subTask: SubTaskInterface): void {
+    subTask.completed = new Date().toISOString();
+    this.modifyTask(task);
+  }
+
+  public reOpenSubTask(task: TaskModel, subTask: SubTaskInterface): void {
+    subTask.completed = '';
+    this.modifyTask(task);
+  }
+
+  public deleteSubTask(task: TaskModel, id: string): void {
+    const subTasks: SubTaskInterface[] = task.subTasks.filter((subTask: SubTaskInterface) => subTask.id !== id);
+    task.subTasks = subTasks;
+    this.modifyTask(task);
   }
 
 }

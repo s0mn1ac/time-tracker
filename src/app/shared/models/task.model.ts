@@ -3,6 +3,7 @@ import { Observable, Subject, share, takeUntil, timer } from 'rxjs';
 
 /* Interfaces */
 import { TaskInterface } from '../interfaces/task.interface';
+import { SubTaskInterface } from '../interfaces/sub-task.interface';
 
 export class TaskModel implements TaskInterface {
 
@@ -11,11 +12,12 @@ export class TaskModel implements TaskInterface {
   public subtitle!: string;
   public created!: string;
   public completed!: string;
-  public subTasks!: TaskInterface[];
+  public subTasks!: SubTaskInterface[];
   public elapsed!: number;
   public startDate!: string;
   public trackers!: string[][];
   public running!: boolean;
+  public expanded!: boolean;
 
   private _timer$!: Observable<number>;
 
@@ -70,7 +72,8 @@ export class TaskModel implements TaskInterface {
       elapsed: this.elapsed,
       startDate: this.startDate,
       trackers: this.trackers,
-      running: this.running
+      running: this.running,
+      expanded: this.expanded
     };
   }
 

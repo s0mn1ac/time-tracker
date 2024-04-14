@@ -1,4 +1,10 @@
-<div class="task-layout">
+<div
+  class="task-layout"
+  [ngClass]="{ 'task-layout--expanded': task.expanded }"
+  tabindex="0"
+  *transloco="let t"
+  (keydown.enter)="stopPropagation($event)"
+  (click)="onClickExpandTask($event)">
 
   <section class="task-layout__main-task-section">
 
@@ -16,7 +22,7 @@
               [rounded]="true"
               [text]="true"
               severity="danger"
-              (click)="onClickStopTimer()">
+              (click)="onClickStopTimer($event)">
             </p-button>
           } @else {
             <p-button
@@ -24,7 +30,7 @@
               [rounded]="true"
               [text]="true"
               severity="primary"
-              (click)="onClickStartTimer()">
+              (click)="onClickStartTimer($event)">
             </p-button>
           }
         </div>
@@ -33,14 +39,14 @@
           [rounded]="true"
           [text]="true"
           severity="success"
-          (click)="onClickCompleteTask(task.id)">
+          (click)="onClickCompleteTask($event)">
         </p-button>
         <p-button
           icon="pi pi-times"
           [rounded]="true"
           [text]="true"
           severity="danger"
-          (click)="onClickDeleteTask(task.id)">
+          (click)="onClickDeleteTask($event)">
         </p-button>
       } @else {
         <p-button
@@ -48,16 +54,34 @@
           [rounded]="true"
           [text]="true"
           severity="primary"
-          (click)="onClickReOpenTask(task.id)">
+          (click)="onClickReOpenTask($event)">
         </p-button>
       }
     </div>
 
   </section>
-
-  @if (task.subTasks.length > 0) {
-    <section class="task-layout__sub-tasks-section">
-
+  
+  @if (task.expanded) {
+    <section
+      class="task-layout__sub-tasks-section"
+      [ngClass]="{ 'task-layout__sub-tasks-section--visible': task.expanded }">
+      @if (task.subTasks.length > 0) {
+        @for (subTask of task.subTasks; track subTask.id) {
+          <app-sub-task [task]="task" [subTask]="subTask"></app-sub-task>
+        }
+      }
+      @if (!task.completed) {
+        <div class="add-sub-task-container">
+          <input
+            type="text"
+            pInputText
+            [placeholder]="t(subTaskInputPlaceholder)"
+            [(ngModel)]="subTaskTitle"
+            (touchend.enter)="onClickAddSubTask($event, subTaskTitle)"
+            (keyup.enter)="onClickAddSubTask($event, subTaskTitle)"
+            (click)="stopPropagation($event)" />
+        </div>
+      }
     </section>
   }
 

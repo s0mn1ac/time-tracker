@@ -2,7 +2,9 @@
   "title": "Time Tracker",
   "common": {
     "addATask": "Añadir una tarea...",
-    "addAnotherTask": "Añadir otra tarea..."
+    "addAnotherTask": "Añadir otra tarea...",
+    "addASubTask": "Añadir una sub-tarea...",
+    "addAnotherSubTask": "Añadir otra sub-tarea..."
   },
   "home": {
     "title": "Inicio",

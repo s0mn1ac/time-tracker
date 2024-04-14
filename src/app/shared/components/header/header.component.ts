@@ -32,14 +32,14 @@ export class HeaderComponent {
 
   public taskTitle: string = '';
 
-  public inputPlaceholder: string = 'addATask';
+  public taskInputPlaceholder: string = 'addATask';
 
   constructor(
     private readonly taskStoreService: TaskStoreService
   ) { }
 
 
-  /* --------- On change methods -------------------------------------------------------------------------------------------------------- */
+  /* --------- On click methods --------------------------------------------------------------------------------------------------------- */
 
   public onClickAddTask(taskTitle: string): void {
 
@@ -53,13 +53,14 @@ export class HeaderComponent {
       elapsed: 0,
       startDate: '',
       trackers: [],
-      running: false
+      running: false,
+      expanded: false
     }
 
     this.taskStoreService.addTask(task);
 
     this.taskTitle = '';
-    this.inputPlaceholder = 'addAnotherTask';
+    this.taskInputPlaceholder = 'addAnotherTask';
   }
 
 }

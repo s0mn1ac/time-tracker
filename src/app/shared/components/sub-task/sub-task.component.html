@@ -1,0 +1,40 @@
+<div class="sub-task-layout">
+
+  <section class="sub-task-layout__task-section">
+
+    <div class="title-container">
+      <span [ngClass]="{ 'completed': subTask.completed}">{{ subTask.title }}</span>
+    </div>
+
+    @if (!task.completed) {
+      <div class="actions-container">
+        @if (!subTask.completed) {
+          <p-button
+            icon="pi pi-check"
+            [rounded]="true"
+            [text]="true"
+            severity="success"
+            (click)="onClickCompleteSubTask($event)">
+          </p-button>
+          <p-button
+            icon="pi pi-times"
+            [rounded]="true"
+            [text]="true"
+            severity="danger"
+            (click)="onClickDeleteSubTask($event)">
+          </p-button>
+        } @else {
+          <p-button
+            icon="pi pi-undo"
+            [rounded]="true"
+            [text]="true"
+            severity="primary"
+            (click)="onClickReOpenSubTask($event)">
+          </p-button>
+        }
+      </div>
+    }
+
+  </section>
+
+</div>
