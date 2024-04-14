@@ -44,6 +44,7 @@ import { DatePipe } from '@angular/common';
 export class TaskComponent {
 
   @Input() public task!: TaskModel;
+  @Input() public soundEffect!: HTMLAudioElement;
 
   public subTaskTitle: string = '';
 
@@ -79,6 +80,7 @@ export class TaskComponent {
   }
 
   public onClickCompleteTask(event: Event): void {
+    this.soundEffect.play();
     this.stopPropagation(event);
     this.taskStoreService.completeTask(this.task);
   }

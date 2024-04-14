@@ -39,9 +39,16 @@ export class HomeComponent {
   public pendingTasks: Signal<TaskModel[]> = this.buildPendingTasksSignal();
   public completedTasks: Signal<TaskModel[]> = this.buildCompletedTasksSignal();
 
+  public soundEffect!: HTMLAudioElement;
+
   constructor(
     private readonly taskStoreService: TaskStoreService
-  ) { }
+  ) {
+    this.initSoundEffect();
+  }
+
+
+  /* --------- Other private methods ---------------------------------------------------------------------------------------------------- */
 
   private buildPendingTasksSignal(): Signal<TaskModel[]> {
     return computed(() => orderBy(this.tasks().filter((task: TaskModel) => !task.completed), 'created', 'desc'));
@@ -49,6 +56,12 @@ export class HomeComponent {
 
   private buildCompletedTasksSignal(): Signal<TaskModel[]> {
     return computed(() => orderBy(this.tasks().filter((task: TaskModel) => task.completed), 'completed', 'desc'));
+  }
+
+  private initSoundEffect(): void {
+    this.soundEffect = new Audio();
+    this.soundEffect.src = 'assets/sounds/click.wav';
+    this.soundEffect.load();
   }
 
 }

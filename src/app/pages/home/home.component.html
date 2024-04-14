@@ -4,7 +4,7 @@
     <section class="available-tasks-section">
       <h2>{{ t('pendingTasks') }}</h2>
       @for (task of pendingTasks(); track task.id) {
-        <app-task [task]="task"></app-task>
+        <app-task [task]="task" [soundEffect]="soundEffect"></app-task>
       }
     </section>
   }
