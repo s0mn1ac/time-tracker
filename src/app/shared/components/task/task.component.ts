@@ -1,7 +1,7 @@
 /* Angular */
 import { Component, Input, WritableSignal, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /* Transloco */
 import { TranslocoModule } from '@jsverse/transloco';
@@ -25,7 +25,6 @@ import { TaskModel } from '../../models/task.model';
 import { SubTaskInterface } from '../../interfaces/sub-task.interface';
 
 /* Pipes */
-import { DatePipe } from '@angular/common';
 import { HoursPipe } from '../../pipes/hours.pipe';
 
 @Component({
@@ -33,8 +32,8 @@ import { HoursPipe } from '../../pipes/hours.pipe';
   standalone: true,
   imports: [
     CommonModule,
-    DatePipe,
     FormsModule,
+    ReactiveFormsModule,
     PrimeNGModule,
     SubTaskComponent,
     TranslocoModule,
@@ -45,14 +44,12 @@ import { HoursPipe } from '../../pipes/hours.pipe';
 })
 export class TaskComponent {
 
-  @Input() public task!: TaskModel;
-  @Input() public soundEffect!: HTMLAudioElement;
+  @Input() task!: TaskModel;
+  @Input() soundEffect!: HTMLAudioElement;
 
   public subTaskTitle: string = '';
 
   public subTaskInputPlaceholder: string = 'common.addASubTask';
-
-  public test: Date = new Date(195766707);
 
   private _timer: WritableSignal<number> = signal(0);
 
@@ -73,33 +70,34 @@ export class TaskComponent {
 
   /* --------- On click methods --------------------------------------------------------------------------------------------------------- */
 
-  public onClickStartTimer(event: Event): void {
+  public onClickStartTimer(event?: Event): void {
     this.stopPropagation(event);
     this.taskStoreService.startTimer(this.task);
   }
 
-  public onClickStopTimer(event: Event): void {
+  public onClickStopTimer(event?: Event): void {
     this.stopPropagation(event);
     this.taskStoreService.stopTimer(this.task);
   }
 
-  public onClickCompleteTask(event: Event): void {
-    this.soundEffect.play();
+  public onClickCheckOrUncheckTask(event?: Event): void {
+
     this.stopPropagation(event);
+
+    if (this.task.checked) {
+      this.taskStoreService.reOpenTask(this.task);
+      return;
+    }
+    this.soundEffect.play();
     this.taskStoreService.completeTask(this.task);
   }
 
-  public onClickReOpenTask(event: Event): void {
-    this.stopPropagation(event);
-    this.taskStoreService.reOpenTask(this.task);
-  }
-
-  public onClickDeleteTask(event: Event): void {
+  public onClickDeleteTask(event?: Event): void {
     this.stopPropagation(event);
     this.taskStoreService.deleteTask(this.task.id);
   }
 
-  public onClickAddSubTask(event: Event, subTaskTitle: string): void {
+  public onClickAddSubTask(subTaskTitle: string, event?: Event): void {
 
     this.stopPropagation(event);
 
@@ -108,7 +106,8 @@ export class TaskComponent {
       title: subTaskTitle,
       subtitle: '',
       created: new Date().toISOString(),
-      completed: ''
+      completed: '',
+      checked: false
     }
 
     this.taskStoreService.addSubTask(this.task, subTask);
@@ -117,7 +116,7 @@ export class TaskComponent {
     this.subTaskInputPlaceholder = 'common.addAnotherSubTask';
   }
 
-  public onClickExpandTask(event: Event): void {
+  public onClickExpandTask(event?: Event): void {
     this.stopPropagation(event);
     this.task.expanded = !this.task.expanded;
     this.taskStoreService.modifyTask(this.task);
@@ -126,9 +125,9 @@ export class TaskComponent {
 
   /* --------- Other public methods ----------------------------------------------------------------------------------------------------- */
 
-  public stopPropagation(event: Event): void {
-    event.stopPropagation();
-    event.preventDefault();
+  public stopPropagation(event?: Event): void {
+    event?.stopPropagation();
+    event?.preventDefault();
   }
 
 }

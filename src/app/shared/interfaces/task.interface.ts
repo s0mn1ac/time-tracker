@@ -15,4 +15,5 @@ export interface TaskInterface {
   trackers: string[][];
   running: boolean;
   expanded: boolean;
+  checked: boolean;
 }

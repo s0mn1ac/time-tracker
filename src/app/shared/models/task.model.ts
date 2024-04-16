@@ -20,6 +20,7 @@ export class TaskModel implements TaskInterface {
   public trackers!: string[][];
   public running!: boolean;
   public expanded!: boolean;
+  public checked!: boolean;
 
   private _timer$!: Observable<number>;
 
@@ -81,7 +82,8 @@ export class TaskModel implements TaskInterface {
       startDate: this.startDate,
       trackers: this.trackers,
       running: this.running,
-      expanded: this.expanded
+      expanded: this.expanded,
+      checked: this.checked
     };
   }
 

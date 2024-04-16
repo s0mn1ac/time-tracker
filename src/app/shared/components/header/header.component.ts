@@ -60,7 +60,8 @@ export class HeaderComponent {
       startDate: '',
       trackers: [],
       running: false,
-      expanded: false
+      expanded: false,
+      checked: false,
     }
 
     this.taskStoreService.addTask(task);

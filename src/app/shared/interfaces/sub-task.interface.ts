@@ -4,4 +4,5 @@ export interface SubTaskInterface {
   subtitle: string;
   created: string;
   completed: string;
+  checked: boolean;
 }

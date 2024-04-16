@@ -1,12 +1,20 @@
 <div
   class="task-layout"
-  [ngClass]="{ 'task-layout--expanded': task.expanded }"
+  [ngClass]="{ 'task-layout--expanded': task.expanded, 'task-layout--checked': task.checked }"
   tabindex="0"
   *transloco="let t"
   (keydown.enter)="stopPropagation($event)"
   (click)="onClickExpandTask($event)">
 
   <section class="task-layout__main-task-section">
+
+    <div class="actions-container">
+      <p-checkbox
+        [ngModel]="task.checked"
+        [binary]="true"
+        (onChange)="onClickCheckOrUncheckTask($event.originalEvent)">
+      </p-checkbox>
+    </div>
 
     <div class="title-container">
       <span>{{ task.title }}</span>
@@ -35,26 +43,11 @@
           }
         </div>
         <p-button
-          icon="pi pi-check"
-          [rounded]="true"
-          [text]="true"
-          severity="success"
-          (click)="onClickCompleteTask($event)">
-        </p-button>
-        <p-button
           icon="pi pi-times"
           [rounded]="true"
           [text]="true"
           severity="danger"
           (click)="onClickDeleteTask($event)">
-        </p-button>
-      } @else {
-        <p-button
-          icon="pi pi-undo"
-          [rounded]="true"
-          [text]="true"
-          severity="primary"
-          (click)="onClickReOpenTask($event)">
         </p-button>
       }
     </div>
@@ -67,7 +60,11 @@
       [ngClass]="{ 'task-layout__sub-tasks-section--visible': task.expanded }">
       @if (task.subTasks.length > 0) {
         @for (subTask of task.subTasks; track subTask.id) {
-          <app-sub-task [task]="task" [subTask]="subTask"></app-sub-task>
+          <app-sub-task
+            [task]="task"
+            [subTask]="subTask"
+            [soundEffect]="soundEffect">
+          </app-sub-task>
         }
       }
       @if (!task.completed) {
@@ -77,8 +74,8 @@
             pInputText
             [placeholder]="t(subTaskInputPlaceholder)"
             [(ngModel)]="subTaskTitle"
-            (touchend.enter)="onClickAddSubTask($event, subTaskTitle)"
-            (keyup.enter)="onClickAddSubTask($event, subTaskTitle)"
+            (touchend.enter)="onClickAddSubTask(subTaskTitle, $event)"
+            (keyup.enter)="onClickAddSubTask(subTaskTitle, $event)"
             (click)="stopPropagation($event)" />
         </div>
       }

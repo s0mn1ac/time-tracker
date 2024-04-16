@@ -1,6 +1,7 @@
 /* Angular */
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 /* PrimeNG */
 import { PrimeNGModule } from '../../modules/primeng.module';
@@ -22,6 +23,7 @@ import { DatePipe } from '@angular/common';
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
     DatePipe,
     PrimeNGModule
   ],
@@ -31,7 +33,8 @@ import { DatePipe } from '@angular/common';
 export class SubTaskComponent {
 
   @Input() task!: TaskModel;
-  @Input() public subTask!: SubTaskInterface;
+  @Input() subTask!: SubTaskInterface;
+  @Input() soundEffect!: HTMLAudioElement;
 
   constructor(
     private readonly taskStoreService: TaskStoreService
@@ -40,17 +43,20 @@ export class SubTaskComponent {
 
   /* --------- On click methods --------------------------------------------------------------------------------------------------------- */
 
-  public onClickCompleteSubTask(event: Event): void {
+  public onClickCheckOrUncheckTask(event?: Event): void {
+
     this.stopPropagation(event);
+
+    if (this.subTask.checked) {
+      this.taskStoreService.reOpenSubTask(this.task, this.subTask);
+      return;
+    }
+
+    this.soundEffect.play();
     this.taskStoreService.completeSubTask(this.task, this.subTask);
   }
 
-  public onClickReOpenSubTask(event: Event): void {
-    this.stopPropagation(event);
-    this.taskStoreService.reOpenSubTask(this.task, this.subTask);
-  }
-
-  public onClickDeleteSubTask(event: Event): void {
+  public onClickDeleteSubTask(event?: Event): void {
     this.stopPropagation(event);
     this.taskStoreService.deleteSubTask(this.task, this.subTask.id);
   }
@@ -58,9 +64,9 @@ export class SubTaskComponent {
 
   /* --------- Other public methods ----------------------------------------------------------------------------------------------------- */
 
-  public stopPropagation(event: Event): void {
-    event.stopPropagation();
-    event.preventDefault();
+  public stopPropagation(event?: Event): void {
+    event?.stopPropagation();
+    event?.preventDefault();
   }
 
 }

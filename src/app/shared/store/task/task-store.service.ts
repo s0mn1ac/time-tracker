@@ -84,11 +84,13 @@ export class TaskStoreService {
 
   public completeTask(task: TaskModel): void {
     task.completed = new Date().toISOString();
+    task.checked = true;
     this.modifyTask(task);
   }
 
   public reOpenTask(task: TaskModel): void {
     task.completed = '';
+    task.checked = false;
     this.modifyTask(task);
   }
 
@@ -99,11 +101,13 @@ export class TaskStoreService {
 
   public completeSubTask(task: TaskModel, subTask: SubTaskInterface): void {
     subTask.completed = new Date().toISOString();
+    subTask.checked = true;
     this.modifyTask(task);
   }
 
   public reOpenSubTask(task: TaskModel, subTask: SubTaskInterface): void {
     subTask.completed = '';
+    subTask.checked = false;
     this.modifyTask(task);
   }
 
