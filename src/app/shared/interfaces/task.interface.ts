@@ -8,7 +8,9 @@ export interface TaskInterface {
   created: string;
   completed: string;
   subTasks: SubTaskInterface[];
-  elapsed: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
   startDate: string;
   trackers: string[][];
   running: boolean;

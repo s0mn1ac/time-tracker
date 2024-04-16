@@ -16,7 +16,7 @@
       @if (!task.completed) {
         <div class="timer-container" [ngClass]="{ 'timer-container--expanded': task.running }">
           @if (task.running) {
-            <span>{{ task.elapsed | date: 'HH:mm:ss': 'utc' }}</span>
+            <span>{{ task.hours | hours : task.minutes : task.seconds }}</span>
             <p-button
               icon="pi pi-stop"
               [rounded]="true"

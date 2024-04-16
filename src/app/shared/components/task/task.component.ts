@@ -26,6 +26,7 @@ import { SubTaskInterface } from '../../interfaces/sub-task.interface';
 
 /* Pipes */
 import { DatePipe } from '@angular/common';
+import { HoursPipe } from '../../pipes/hours.pipe';
 
 @Component({
   selector: 'app-task',
@@ -36,7 +37,8 @@ import { DatePipe } from '@angular/common';
     FormsModule,
     PrimeNGModule,
     SubTaskComponent,
-    TranslocoModule
+    TranslocoModule,
+    HoursPipe
   ],
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss'
@@ -49,6 +51,8 @@ export class TaskComponent {
   public subTaskTitle: string = '';
 
   public subTaskInputPlaceholder: string = 'common.addASubTask';
+
+  public test: Date = new Date(195766707);
 
   private _timer: WritableSignal<number> = signal(0);
 

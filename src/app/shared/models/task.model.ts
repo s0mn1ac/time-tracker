@@ -13,7 +13,9 @@ export class TaskModel implements TaskInterface {
   public created!: string;
   public completed!: string;
   public subTasks!: SubTaskInterface[];
-  public elapsed!: number;
+  public hours!: number;
+  public minutes!: number;
+  public seconds!: number;
   public startDate!: string;
   public trackers!: string[][];
   public running!: boolean;
@@ -47,7 +49,9 @@ export class TaskModel implements TaskInterface {
   public startClock(startDate: Date): void {
     this.running = true;
     this.startDate = startDate.toISOString();
-    this.elapsed = 0;
+    this.hours = 0;
+    this.minutes = 0;
+    this.seconds = 0;
     this._stop$ = new Subject<boolean>();
     this._timer$ = timer(0, 500).pipe(takeUntil(this._stop$), share());
     this.initTimerSubscription();
@@ -56,7 +60,9 @@ export class TaskModel implements TaskInterface {
   public stopClock(): void {
     this.trackers.push([this.startDate, new Date().toISOString()]);
     this._stop$.next(true);
-    this.elapsed = 0;
+    this.hours = 0;
+    this.minutes = 0;
+    this.seconds = 0;
     this.startDate = '';
     this.running = false;
   }
@@ -69,7 +75,9 @@ export class TaskModel implements TaskInterface {
       created: this.created,
       completed: this.completed,
       subTasks: this.subTasks,
-      elapsed: this.elapsed,
+      hours: this.hours,
+      minutes: this.minutes,
+      seconds: this.seconds,
       startDate: this.startDate,
       trackers: this.trackers,
       running: this.running,
@@ -82,8 +90,13 @@ export class TaskModel implements TaskInterface {
 
   private initTimerSubscription(): void {
     this.timer
-    .pipe(takeUntil(this._stop$))
-    .subscribe(() => this.elapsed = Math.abs(new Date().getTime() - new Date(this.startDate).getTime()));
+      .pipe(takeUntil(this._stop$))
+      .subscribe(() => {
+        const miliseconds: number = new Date().getTime() - new Date(this.startDate).getTime();
+        this.hours = Math.floor(miliseconds / (1000 * 60 * 60));
+        this.minutes = Math.floor((miliseconds % (1000 * 60 * 60)) / (1000 * 60));
+        this.seconds = Math.floor((miliseconds % (1000 * 60)) / 1000);
+      });
   }
 
 }
