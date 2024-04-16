@@ -1,4 +1,4 @@
-button, p-button {
+button:not(.p-button-icon-only), p-button:not(.p-button-icon-only) {
   height: 48px;
   border-radius: var(--tt-border-radius-sm);
 }
