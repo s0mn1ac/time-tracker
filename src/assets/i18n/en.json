@@ -6,6 +6,9 @@
     "addASubTask": "Add a sub-task...",
     "addAnotherSubTask": "Add another sub-task..."
   },
+  "buttons": {
+    "add": "Add"
+  },
   "home": {
     "title": "Home",
     "pendingTasks": "Pending tasks",

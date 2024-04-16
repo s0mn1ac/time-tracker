@@ -6,6 +6,9 @@
     "addASubTask": "Añadir una sub-tarea...",
     "addAnotherSubTask": "Añadir otra sub-tarea..."
   },
+  "buttons": {
+    "add": "Añadir"
+  },
   "home": {
     "title": "Inicio",
     "pendingTasks": "Tareas pendientes",

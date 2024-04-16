@@ -1,6 +1,7 @@
 /* Angular */
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 /* Transloco */
 import { TranslocoModule } from '@jsverse/transloco';
@@ -21,6 +22,7 @@ import { TaskInterface } from '../../interfaces/task.interface';
   selector: 'app-header',
   standalone: true,
   imports: [
+    CommonModule,
     FormsModule,
     PrimeNGModule,
     TranslocoModule
@@ -30,9 +32,11 @@ import { TaskInterface } from '../../interfaces/task.interface';
 })
 export class HeaderComponent {
 
+  @ViewChild('taskTitleInput') taskTitleInput!: ElementRef;
+
   public taskTitle: string = '';
 
-  public taskInputPlaceholder: string = 'addATask';
+  public taskInputPlaceholder: string = 'common.addATask';
 
   constructor(
     private readonly taskStoreService: TaskStoreService
@@ -62,7 +66,9 @@ export class HeaderComponent {
     this.taskStoreService.addTask(task);
 
     this.taskTitle = '';
-    this.taskInputPlaceholder = 'addAnotherTask';
+    this.taskInputPlaceholder = 'common.addAnotherTask';
+
+    this.taskTitleInput.nativeElement.focus();
   }
 
 }

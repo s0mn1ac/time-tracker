@@ -12,19 +12,13 @@
     flex: 1;
     justify-content: center;
     align-items: center;
-
-    span {
+    gap: 1rem;
+    
+    input {
       transition: width 0.2s ease;
       width: 250px;
 
-      input {
-        width: 100%;
-      }
-    }
-
-    &:focus-within {
-
-      span {
+      &:focus-within, &.expanded {
         width: 100%;
       }
     }

@@ -1,17 +1,23 @@
-<header class="time-tracker-header" *transloco="let t; prefix: 'common'">
+<header class="time-tracker-header" *transloco="let t">
 
   <section class="add-task-section">
     
-    <span class="p-input-icon-left">
-      <i class="pi pi-plus"></i>
-      <input
-        type="text"
-        pInputText
-        [placeholder]="t(taskInputPlaceholder)"
-        [(ngModel)]="taskTitle"
-        (touchend.enter)="onClickAddTask(taskTitle)"
-        (keyup.enter)="onClickAddTask(taskTitle)" />
-    </span>
+    <input
+      #taskTitleInput
+      type="text"
+      pInputText
+      [placeholder]="t(taskInputPlaceholder)"
+      [(ngModel)]="taskTitle"
+      [ngClass]="{ 'expanded' : taskTitle }"
+      (keydown.enter)="onClickAddTask(taskTitle)"/>
+
+      <button
+        pButton
+        pRipple
+        [disabled]="!taskTitle"
+        (click)="onClickAddTask(taskTitle)">
+        {{ t('buttons.add') }}
+      </button>
 
   </section>
 
