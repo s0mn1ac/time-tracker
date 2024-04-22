@@ -1,4 +1,10 @@
-button:not(.p-button-icon-only), p-button:not(.p-button-icon-only) {
+button:not(.p-button-icon-only) {
   height: 48px;
   border-radius: var(--tt-border-radius-sm);
+}
+
+button.p-button-icon-only {
+
+  width: 36px;
+  height: 36px;
 }
