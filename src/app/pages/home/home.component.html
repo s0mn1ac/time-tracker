@@ -13,7 +13,7 @@
     <section class="completed-tasks-section">
       <h2>{{ t('completedTasks') }}</h2>
       @for (task of completedTasks(); track task.id) {
-        <app-task [task]="task"></app-task>
+        <app-task [task]="task" [soundEffect]="soundEffect"></app-task>
       }
     </section>
   }
