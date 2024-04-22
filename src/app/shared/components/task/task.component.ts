@@ -1,5 +1,5 @@
 /* Angular */
-import { Component, Input, WritableSignal, signal } from '@angular/core';
+import { Component, Input, Signal, WritableSignal, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -26,6 +26,7 @@ import { SubTaskInterface } from '../../interfaces/sub-task.interface';
 
 /* Pipes */
 import { HoursPipe } from '../../pipes/hours.pipe';
+import { orderBy } from 'lodash';
 
 @Component({
   selector: 'app-task',
@@ -44,12 +45,25 @@ import { HoursPipe } from '../../pipes/hours.pipe';
 })
 export class TaskComponent {
 
-  @Input() task!: TaskModel;
+  @Input() set task(task: TaskModel) {
+    this._task = task;
+    this.subTasks = signal(this.task.subTasks);
+    this.pendingSubTasks = this.buildPendingSubTasksSignal();
+    this.completedSubTasks = this.buildCompletedSubTasksSignal();
+  }
+ 
   @Input() soundEffect!: HTMLAudioElement;
 
   public subTaskTitle: string = '';
 
   public subTaskInputPlaceholder: string = 'common.addASubTask';
+
+  public subTasks!: WritableSignal<SubTaskInterface[]>;
+
+  public pendingSubTasks!: Signal<SubTaskInterface[]>;
+  public completedSubTasks!: Signal<SubTaskInterface[]>;
+
+  private _task!: TaskModel;
 
   private _timer: WritableSignal<number> = signal(0);
 
@@ -58,6 +72,10 @@ export class TaskComponent {
   ) { }
 
   /* --------- Getters & Setters -------------------------------------------------------------------------------------------------------- */
+
+  get task(): TaskModel {
+    return this._task;
+  }
 
   get timer(): number {
     return this._timer();
@@ -128,6 +146,17 @@ export class TaskComponent {
   public stopPropagation(event?: Event): void {
     event?.stopPropagation();
     event?.preventDefault();
+  }
+
+ 
+  /* --------- Other private methods ---------------------------------------------------------------------------------------------------- */
+
+  private buildPendingSubTasksSignal(): Signal<SubTaskInterface[]> {
+    return computed(() => orderBy(this.subTasks().filter((subTask: SubTaskInterface) => !subTask.completed), 'created', 'desc'));
+  }
+
+  private buildCompletedSubTasksSignal(): Signal<SubTaskInterface[]> {
+    return computed(() => orderBy(this.subTasks().filter((subTask: SubTaskInterface) => subTask.completed), 'completed', 'desc'));
   }
 
 }

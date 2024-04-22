@@ -18,6 +18,11 @@
 
     <div class="title-container">
       <span>{{ task.title }}</span>
+      @if (task.subTasks.length > 0) {
+        <span class="secondary-text">
+          {{ completedSubTasks().length + ' ' + t('common.of') + ' ' + task.subTasks.length }}
+        </span>
+      }
     </div>
 
     <div class="actions-container">

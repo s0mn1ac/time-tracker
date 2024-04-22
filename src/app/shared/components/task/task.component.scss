@@ -45,9 +45,10 @@
 
 .title-container {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  gap: 0.5rem;
 }
 
 .actions-container {

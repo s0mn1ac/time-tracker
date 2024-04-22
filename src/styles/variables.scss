@@ -1,15 +1,15 @@
 :root {
 
-  --color-slate-50: #f8fafc;
-  --color-slate-100: #f1f5f9;
-  --color-slate-200: #e2e8f0;
-  --color-slate-300: #cbd5e1;
-  --color-slate-400: #94a3b8;
-  --color-slate-500: #64748b;
-  --color-slate-600: #475569;
-  --color-slate-700: #334155;
-  --color-slate-800: #1e293b;
-  --color-slate-900: #0f172a;
+  --tt-color-slate-50: #f8fafc;
+  --tt-color-slate-100: #f1f5f9;
+  --tt-color-slate-200: #e2e8f0;
+  --tt-color-slate-300: #cbd5e1;
+  --tt-color-slate-400: #94a3b8;
+  --tt-color-slate-500: #64748b;
+  --tt-color-slate-600: #475569;
+  --tt-color-slate-700: #334155;
+  --tt-color-slate-800: #1e293b;
+  --tt-color-slate-900: #0f172a;
 
   --tt-color-danger: #EF4444;
   --tt-color-primary: #3B82F6;
@@ -24,13 +24,13 @@
   --tt-shadow-lg: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   --tt-shadow-xl: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 
-  --tt-background-color-high-light: var(--color-slate-50);
-  --tt-background-color-medium-light: var(--color-slate-100);
-  --tt-background-color-low-light: var(--color-slate-200);
-  --tt-background-color-hover-light: var(--color-slate-300);
+  --tt-background-color-high-light: var(--tt-color-slate-50);
+  --tt-background-color-medium-light: var(--tt-color-slate-100);
+  --tt-background-color-low-light: var(--tt-color-slate-200);
+  --tt-background-color-hover-light: var(--tt-color-slate-300);
 
-  --tt-background-color-high-dark: var(--color-slate-900);
-  --tt-background-color-medium-dark: var(--color-slate-800);
-  --tt-background-color-low-dark: var(--color-slate-700);
-  --tt-background-color-hover-light: var(--color-slate-600);
+  --tt-background-color-high-dark: var(--tt-color-slate-900);
+  --tt-background-color-medium-dark: var(--tt-color-slate-800);
+  --tt-background-color-low-dark: var(--tt-color-slate-700);
+  --tt-background-color-hover-light: var(--tt-color-slate-600);
 }

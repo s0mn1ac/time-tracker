@@ -4,7 +4,8 @@
     "addATask": "Add a task...",
     "addAnotherTask": "Add another task...",
     "addASubTask": "Add a sub-task...",
-    "addAnotherSubTask": "Add another sub-task..."
+    "addAnotherSubTask": "Add another sub-task...",
+    "of": "of"
   },
   "buttons": {
     "add": "Add"

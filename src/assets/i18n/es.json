@@ -4,7 +4,8 @@
     "addATask": "Añadir una tarea...",
     "addAnotherTask": "Añadir otra tarea...",
     "addASubTask": "Añadir una sub-tarea...",
-    "addAnotherSubTask": "Añadir otra sub-tarea..."
+    "addAnotherSubTask": "Añadir otra sub-tarea...",
+    "of": "de"
   },
   "buttons": {
     "add": "Añadir"
