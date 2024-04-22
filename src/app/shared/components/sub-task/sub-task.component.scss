@@ -21,9 +21,14 @@
     flex-direction: row;
     align-items: center;
     flex: 1;
+
+    span {
+      transition: opacity 0.2s, text-decoration 0.2s;
   
-    span.completed {
-      text-decoration: line-through;
+      &.completed {
+        text-decoration: line-through;
+        opacity: 0.4;
+      }
     }
   }
   
