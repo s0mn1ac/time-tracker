@@ -59,12 +59,15 @@
       class="task-layout__sub-tasks-section"
       [ngClass]="{ 'task-layout__sub-tasks-section--visible': task.expanded }">
       @if (task.subTasks.length > 0) {
-        @for (subTask of task.subTasks; track subTask.id) {
+        @for (subTask of task.subTasks; track subTask.id; let isLast = $last) {
           <app-sub-task
             [task]="task"
             [subTask]="subTask"
             [soundEffect]="soundEffect">
           </app-sub-task>
+          @if (!isLast) {
+            <p-divider></p-divider>
+          }
         }
       }
       @if (!task.completed) {

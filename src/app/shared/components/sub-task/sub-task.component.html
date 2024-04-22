@@ -4,20 +4,16 @@
   (keydown.enter)="stopPropagation($event)"
   (click)="onClickCheckOrUncheckTask($event)">
 
-  <section class="sub-task-layout__task-section">
+  <div class="sub-task-layout__actions-container">
+    <p-checkbox
+      [ngModel]="subTask.checked"
+      [binary]="true"
+      (onChange)="onClickCheckOrUncheckTask($event.originalEvent)">
+    </p-checkbox>
+  </div>
 
-    <div class="actions-container">
-      <p-checkbox
-        [ngModel]="subTask.checked"
-        [binary]="true"
-        (onChange)="onClickCheckOrUncheckTask($event.originalEvent)">
-      </p-checkbox>
-    </div>
-
-    <div class="title-container">
-      <span [ngClass]="{ 'completed': subTask.completed}">{{ subTask.title }}</span>
-    </div>
-
-  </section>
+  <div class="sub-task-layout__title-container">
+    <span [ngClass]="{ 'completed': subTask.completed}">{{ subTask.title }}</span>
+  </div>
 
 </div>
